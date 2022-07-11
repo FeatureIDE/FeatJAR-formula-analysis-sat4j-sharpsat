@@ -22,26 +22,23 @@
  */
 package de.featjar.analysis.sat4j_sharpsat;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.nio.file.*;
-import java.util.*;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.List;
+
+import org.junit.jupiter.api.Test;
 
 import de.featjar.analysis.sat4j.AllConfigurationGenerator;
 import de.featjar.analysis.sat4j.twise.TWiseConfigurationGenerator;
 import de.featjar.clauses.ClauseList;
 import de.featjar.clauses.Clauses;
 import de.featjar.clauses.solutions.SolutionList;
+import de.featjar.configuration.list.DistributionMetrics.RatioDiffFunction;
 import de.featjar.formula.ModelRepresentation;
 import de.featjar.util.extension.ExtensionLoader;
-import org.junit.jupiter.api.*;
-import de.featjar.analysis.sat4j.*;
-import de.featjar.analysis.sat4j.twise.*;
-import de.featjar.clauses.*;
-import de.featjar.clauses.solutions.*;
-import de.featjar.configuration.list.DistributionMetrics.*;
-import de.featjar.formula.*;
-import de.featjar.util.extension.*;
 
 public class SharpSatSolverTest {
 
@@ -56,7 +53,7 @@ public class SharpSatSolverTest {
 
 	private static ModelRepresentation load(final Path modelFile) {
 		return ModelRepresentation.load(modelFile) //
-			.orElseThrow(p -> new IllegalArgumentException(p.isEmpty() ? null : p.get(0).getError().get()));
+			.orElseThrow(p -> new IllegalArgumentException(p.isEmpty() ? null : p.get(0).toException()));
 	}
 
 	static {
@@ -69,7 +66,7 @@ public class SharpSatSolverTest {
 			final ModelRepresentation rep = load(modelDirectory.resolve(modelName + ".xml"));
 			final RatioDiffFunction ratioDiffFunction = new RatioDiffFunction(rep);
 
-			final SolutionList sample = new AllConfigurationGenerator().getResult(rep).orElseThrow();
+			final SolutionList sample = rep.getResult(new AllConfigurationGenerator()).orElseThrow();
 			final List<ClauseList> expressions = TWiseConfigurationGenerator.convertLiterals(Clauses.getLiterals(
 				rep.getVariables())).get(0);
 

@@ -33,17 +33,9 @@ import de.featjar.clauses.solutions.SolutionList;
 import de.featjar.formula.ModelRepresentation;
 import de.featjar.formula.structure.Formula;
 import de.featjar.formula.structure.FormulaProvider;
+import de.featjar.formula.structure.atomic.literal.VariableMap;
 import de.featjar.util.data.Identifier;
 import de.featjar.util.job.InternalMonitor;
-import de.featjar.analysis.sat4j.*;
-import de.featjar.analysis.sat4j.solver.*;
-import de.featjar.analysis.sharpsat.solver.*;
-import de.featjar.clauses.*;
-import de.featjar.clauses.solutions.*;
-import de.featjar.formula.*;
-import de.featjar.formula.structure.*;
-import de.featjar.util.data.*;
-import de.featjar.util.job.*;
 
 /**
  * Finds certain solutions of propositional formulas.
@@ -55,7 +47,7 @@ public class UniformRandomConfigurationGenerator extends RandomConfigurationGene
 	public static final Identifier<SolutionList> identifier = new Identifier<>();
 
 	@Override
-	protected Identifier<SolutionList> getIdentifier() {
+	public Identifier<SolutionList> getIdentifier() {
 		return identifier;
 	}
 
@@ -79,7 +71,7 @@ public class UniformRandomConfigurationGenerator extends RandomConfigurationGene
 		sharpSatSolver.getAssumptions().setAll(assumptions.getAll());
 		sharpSatSolver.getDynamicFormula().push(assumedConstraints);
 
-		dist = new VariableDistribution(sharpSatSolver, modelFormula.getVariableMap().size());
+		dist = new VariableDistribution(sharpSatSolver, modelFormula.getVariableMap().map(VariableMap::getVariableCount).orElse(0));
 		dist.setRandom(getRandom());
 		solver.setSelectionStrategy(SStrategy.uniform(dist));
 	}

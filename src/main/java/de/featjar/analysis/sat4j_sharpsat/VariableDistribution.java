@@ -22,13 +22,12 @@
  */
 package de.featjar.analysis.sat4j_sharpsat;
 
-import java.math.*;
-import java.util.*;
+import java.math.BigDecimal;
+import java.math.MathContext;
+import java.util.Arrays;
 
 import de.featjar.analysis.sat4j.solver.LiteralDistribution;
 import de.featjar.analysis.sharpsat.solver.SharpSatSolver;
-import de.featjar.analysis.sat4j.solver.*;
-import de.featjar.analysis.sharpsat.solver.*;
 
 /**
  * Uses a sample of configurations to achieve a phase selection that corresponds
