@@ -1,23 +1,23 @@
 /* -----------------------------------------------------------------------------
- * Formula-Analysis-Sat4J-SharpSat Lib - Library to analyze propositional formulas with Sat4J and SharpSAT.
- * Copyright (C) 2021  Sebastian Krieter
+ * formula-analysis-sat4j-sharpsat - Analysis of propositional formulas using Sat4j and sharpSAT
+ * Copyright (C) 2022 Sebastian Krieter
  * 
- * This file is part of Formula-Analysis-Sat4J-SharpSat Lib.
+ * This file is part of formula-analysis-sat4j-sharpsat.
  * 
- * Formula-Analysis-Sat4J-SharpSat Lib is free software: you can redistribute it and/or modify it
+ * formula-analysis-sat4j-sharpsat is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License,
+ * the Free Software Foundation, either version 3.0 of the License,
  * or (at your option) any later version.
  * 
- * Formula-Analysis-Sat4J-SharpSat Lib is distributed in the hope that it will be useful,
+ * formula-analysis-sat4j-sharpsat is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  * See the GNU Lesser General Public License for more details.
  * 
  * You should have received a copy of the GNU Lesser General Public License
- * along with Formula-Analysis-Sat4J-SharpSat Lib.  If not, see <https://www.gnu.org/licenses/>.
+ * along with formula-analysis-sat4j-sharpsat. If not, see <https://www.gnu.org/licenses/>.
  * 
- * See <https://github.com/skrieter/formula-analysis-sat4j-sharpsat> for further information.
+ * See <https://github.com/FeatJAR/formula-analysis-sat4j-sharpsat> for further information.
  * -----------------------------------------------------------------------------
  */
 package org.spldev.analysis.sat4j_sharpsat;
