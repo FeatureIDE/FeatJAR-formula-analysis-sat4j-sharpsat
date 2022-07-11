@@ -1,9 +1,0 @@
-license:
-  name: lgpl
-  version: 3
-program:
-  name: Formula-Analysis-Sat4J-SharpSat Lib
-  description: Library to analyze propositional formulas with Sat4J and SharpSAT.
-  authors: Sebastian Krieter
-  url: https://github.com/skrieter/formula-analysis-sat4j-sharpsat
-  year: 2021
