@@ -51,6 +51,13 @@
 			<artifactId>formula-analysis-sharpsat</artifactId>
 			<version>1.0-SNAPSHOT</version>
 		</dependency>
+		<dependency>
+			<groupId>de.featjar</groupId>
+			<artifactId>native-sharpsat</artifactId>
+			<version>1.0-SNAPSHOT</version>
+			<classifier>binary</classifier>
+			<type>tar.gz</type>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -61,7 +68,7 @@
 				<executions>
 					<execution>
 						<id>copy-dependency</id>
-						<phase>validate</phase>
+						<phase>process-resources</phase>
 						<goals>
 							<goal>unpack</goal>
 						</goals>
@@ -69,7 +76,7 @@
 							<artifactItems>
 								<artifactItem>
 									<groupId>de.featjar</groupId>
-									<artifactId>sharpsat-native</artifactId>
+									<artifactId>native-sharpsat</artifactId>
 									<classifier>binary</classifier>
 									<type>tar.gz</type>
 									<overWrite>true</overWrite>
@@ -87,7 +94,7 @@
 				<executions>
 					<execution>
 						<id>copy-resources</id>
-						<phase>validate</phase>
+						<phase>process-resources</phase>
 						<goals>
 							<goal>copy-resources</goal>
 						</goals>
