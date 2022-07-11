@@ -20,18 +20,30 @@
  * See <https://github.com/FeatJAR/formula-analysis-sat4j-sharpsat> for further information.
  * -----------------------------------------------------------------------------
  */
-package org.spldev.analysis.sat4j_sharpsat;
+package de.featjar.analysis.sat4j_sharpsat;
 
-import org.spldev.analysis.sat4j.*;
-import org.spldev.analysis.sat4j.solver.*;
-import org.spldev.analysis.sharpsat.solver.*;
-import org.spldev.analysis.solver.SatSolver.*;
-import org.spldev.clauses.*;
-import org.spldev.clauses.solutions.*;
-import org.spldev.formula.*;
-import org.spldev.formula.structure.*;
-import org.spldev.util.data.*;
-import org.spldev.util.job.*;
+import de.featjar.analysis.sat4j.RandomConfigurationGenerator;
+import de.featjar.analysis.sat4j.solver.SStrategy;
+import de.featjar.analysis.sat4j.solver.Sat4JSolver;
+import de.featjar.analysis.sharpsat.solver.SharpSatSolver;
+import de.featjar.analysis.solver.SatSolver;
+import de.featjar.clauses.Clauses;
+import de.featjar.clauses.LiteralList;
+import de.featjar.clauses.solutions.SolutionList;
+import de.featjar.formula.ModelRepresentation;
+import de.featjar.formula.structure.Formula;
+import de.featjar.formula.structure.FormulaProvider;
+import de.featjar.util.data.Identifier;
+import de.featjar.util.job.InternalMonitor;
+import de.featjar.analysis.sat4j.*;
+import de.featjar.analysis.sat4j.solver.*;
+import de.featjar.analysis.sharpsat.solver.*;
+import de.featjar.clauses.*;
+import de.featjar.clauses.solutions.*;
+import de.featjar.formula.*;
+import de.featjar.formula.structure.*;
+import de.featjar.util.data.*;
+import de.featjar.util.job.*;
 
 /**
  * Finds certain solutions of propositional formulas.
@@ -101,7 +113,7 @@ public class UniformRandomConfigurationGenerator extends RandomConfigurationGene
 			final int varX = fixedFeatures[i];
 			if (varX != 0) {
 				solver.getAssumptions().push(-varX);
-				final SatResult hasSolution = solver.hasSolution();
+				final SatSolver.SatResult hasSolution = solver.hasSolution();
 				switch (hasSolution) {
 				case FALSE:
 					solver.getAssumptions().replaceLast(varX);

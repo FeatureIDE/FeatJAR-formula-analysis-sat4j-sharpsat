@@ -20,21 +20,28 @@
  * See <https://github.com/FeatJAR/formula-analysis-sat4j-sharpsat> for further information.
  * -----------------------------------------------------------------------------
  */
-package org.spldev.analysis.sat4j_sharpsat;
+package de.featjar.analysis.sat4j_sharpsat;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.nio.file.*;
 import java.util.*;
 
+import de.featjar.analysis.sat4j.AllConfigurationGenerator;
+import de.featjar.analysis.sat4j.twise.TWiseConfigurationGenerator;
+import de.featjar.clauses.ClauseList;
+import de.featjar.clauses.Clauses;
+import de.featjar.clauses.solutions.SolutionList;
+import de.featjar.formula.ModelRepresentation;
+import de.featjar.util.extension.ExtensionLoader;
 import org.junit.jupiter.api.*;
-import org.spldev.analysis.sat4j.*;
-import org.spldev.analysis.sat4j.twise.*;
-import org.spldev.clauses.*;
-import org.spldev.clauses.solutions.*;
-import org.spldev.configuration.list.DistributionMetrics.*;
-import org.spldev.formula.*;
-import org.spldev.util.extension.*;
+import de.featjar.analysis.sat4j.*;
+import de.featjar.analysis.sat4j.twise.*;
+import de.featjar.clauses.*;
+import de.featjar.clauses.solutions.*;
+import de.featjar.configuration.list.DistributionMetrics.*;
+import de.featjar.formula.*;
+import de.featjar.util.extension.*;
 
 public class SharpSatSolverTest {
 

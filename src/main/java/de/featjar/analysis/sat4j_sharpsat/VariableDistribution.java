@@ -20,13 +20,15 @@
  * See <https://github.com/FeatJAR/formula-analysis-sat4j-sharpsat> for further information.
  * -----------------------------------------------------------------------------
  */
-package org.spldev.analysis.sat4j_sharpsat;
+package de.featjar.analysis.sat4j_sharpsat;
 
 import java.math.*;
 import java.util.*;
 
-import org.spldev.analysis.sat4j.solver.*;
-import org.spldev.analysis.sharpsat.solver.*;
+import de.featjar.analysis.sat4j.solver.LiteralDistribution;
+import de.featjar.analysis.sharpsat.solver.SharpSatSolver;
+import de.featjar.analysis.sat4j.solver.*;
+import de.featjar.analysis.sharpsat.solver.*;
 
 /**
  * Uses a sample of configurations to achieve a phase selection that corresponds
