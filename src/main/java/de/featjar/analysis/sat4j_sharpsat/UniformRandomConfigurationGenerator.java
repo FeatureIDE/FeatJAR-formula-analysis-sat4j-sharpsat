@@ -71,7 +71,8 @@ public class UniformRandomConfigurationGenerator extends RandomConfigurationGene
 		sharpSatSolver.getAssumptions().setAll(assumptions.getAll());
 		sharpSatSolver.getDynamicFormula().push(assumedConstraints);
 
-		dist = new VariableDistribution(sharpSatSolver, modelFormula.getVariableMap().map(VariableMap::getVariableCount).orElse(0));
+		dist = new VariableDistribution(sharpSatSolver, modelFormula.getVariableMap().map(VariableMap::getVariableCount)
+			.orElse(0));
 		dist.setRandom(getRandom());
 		solver.setSelectionStrategy(SStrategy.uniform(dist));
 	}
