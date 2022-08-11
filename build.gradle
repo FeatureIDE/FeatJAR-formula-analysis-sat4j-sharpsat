@@ -1,0 +1,12 @@
+plugins {
+    id 'java-library'
+    id 'de.featjar.java-application'
+}
+
+dependencies {
+    implementation 'de.featjar:util'
+    implementation 'de.featjar:formula'
+    implementation 'de.featjar:formula-analysis-sat4j'
+    implementation 'de.featjar:formula-analysis-sharpsat'
+    implementation 'de.featjar:native-sharpsat'
+}
