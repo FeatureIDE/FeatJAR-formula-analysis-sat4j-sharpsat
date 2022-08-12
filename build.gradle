@@ -4,9 +4,7 @@ plugins {
 }
 
 dependencies {
-    implementation 'de.featjar:util'
-    implementation 'de.featjar:formula'
-    implementation 'de.featjar:formula-analysis-sat4j'
-    implementation 'de.featjar:formula-analysis-sharpsat'
-    implementation 'de.featjar:bin-sharpsat'
+    api 'de.featjar:formula'
+    api 'de.featjar:formula-analysis-sat4j'
+    api 'de.featjar:formula-analysis-sharpsat'
 }
