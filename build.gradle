@@ -8,5 +8,5 @@ dependencies {
     implementation 'de.featjar:formula'
     implementation 'de.featjar:formula-analysis-sat4j'
     implementation 'de.featjar:formula-analysis-sharpsat'
-    implementation 'de.featjar:native-sharpsat'
+    implementation 'de.featjar:bin-sharpsat'
 }
