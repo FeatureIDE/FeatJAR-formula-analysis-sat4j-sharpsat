@@ -20,12 +20,11 @@
  */
 package de.featjar.analysis.sat4j_sharpsat;
 
+import de.featjar.analysis.sat4j.solver.LiteralDistribution;
+import de.featjar.analysis.sharpsat.solver.SharpSatSolver;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.Arrays;
-
-import de.featjar.analysis.sat4j.solver.LiteralDistribution;
-import de.featjar.analysis.sharpsat.solver.SharpSatSolver;
 
 /**
  * Uses a sample of configurations to achieve a phase selection that corresponds
@@ -35,60 +34,57 @@ import de.featjar.analysis.sharpsat.solver.SharpSatSolver;
  */
 public class VariableDistribution extends LiteralDistribution {
 
-	private final byte[] model;
-	private BigDecimal totalCount;
-	private SharpSatSolver solver;
+    private final byte[] model;
+    private BigDecimal totalCount;
+    private SharpSatSolver solver;
 
-	public VariableDistribution(SharpSatSolver solver, int size) {
-		this.solver = solver;
-		model = new byte[size];
-		totalCount = new BigDecimal(solver.countSolutions());
-	}
+    public VariableDistribution(SharpSatSolver solver, int size) {
+        this.solver = solver;
+        model = new byte[size];
+        totalCount = new BigDecimal(solver.countSolutions());
+    }
 
-	@Override
-	public void reset() {
-		Arrays.fill(model, (byte) 0);
-		solver.getAssumptions().unsetAll();
-	}
+    @Override
+    public void reset() {
+        Arrays.fill(model, (byte) 0);
+        solver.getAssumptions().unsetAll();
+    }
 
-	@Override
-	public void unset(int var) {
-		final int index = var - 1;
-		final byte sign = model[index];
-		if (sign != 0) {
-			model[index] = 0;
-			solver.getAssumptions().unset(index + 1);
-		}
-	}
+    @Override
+    public void unset(int var) {
+        final int index = var - 1;
+        final byte sign = model[index];
+        if (sign != 0) {
+            model[index] = 0;
+            solver.getAssumptions().unset(index + 1);
+        }
+    }
 
-	@Override
-	public void set(int literal) {
-		final int index = Math.abs(literal) - 1;
-		if (model[index] == 0) {
-			final boolean positive = literal > 0;
-			model[index] = (byte) (positive ? 1 : -1);
-			solver.getAssumptions().set(index + 1, positive);
-		}
-	}
+    @Override
+    public void set(int literal) {
+        final int index = Math.abs(literal) - 1;
+        if (model[index] == 0) {
+            final boolean positive = literal > 0;
+            model[index] = (byte) (positive ? 1 : -1);
+            solver.getAssumptions().set(index + 1, positive);
+        }
+    }
 
-	@Override
-	public int getRandomLiteral(int var) {
-		final int index = Math.abs(var) - 1;
-		final byte sign = model[index];
-		if (sign != 0) {
-			return sign > 0 ? var : -var;
-		} else {
-			final int varIndex = Math.abs(var);
-			solver.getAssumptions().set(varIndex, true);
-			final BigDecimal positiveCount = new BigDecimal(solver.countSolutions());
-			solver.getAssumptions().unset(varIndex);
-			final double ratio = positiveCount.divide(totalCount, MathContext.DECIMAL32).doubleValue();
-			final double randomValue = random.nextDouble();
-			return randomValue < ratio
-				? var
-				: -var;
-		}
-
-	}
-
+    @Override
+    public int getRandomLiteral(int var) {
+        final int index = Math.abs(var) - 1;
+        final byte sign = model[index];
+        if (sign != 0) {
+            return sign > 0 ? var : -var;
+        } else {
+            final int varIndex = Math.abs(var);
+            solver.getAssumptions().set(varIndex, true);
+            final BigDecimal positiveCount = new BigDecimal(solver.countSolutions());
+            solver.getAssumptions().unset(varIndex);
+            final double ratio =
+                    positiveCount.divide(totalCount, MathContext.DECIMAL32).doubleValue();
+            final double randomValue = random.nextDouble();
+            return randomValue < ratio ? var : -var;
+        }
+    }
 }

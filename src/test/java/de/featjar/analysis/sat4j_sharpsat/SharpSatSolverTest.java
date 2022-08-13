@@ -22,13 +22,6 @@ package de.featjar.analysis.sat4j_sharpsat;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Arrays;
-import java.util.List;
-
-import org.junit.jupiter.api.Test;
-
 import de.featjar.analysis.sat4j.AllConfigurationGenerator;
 import de.featjar.analysis.sat4j.twise.TWiseConfigurationGenerator;
 import de.featjar.clauses.ClauseList;
@@ -37,42 +30,48 @@ import de.featjar.clauses.solutions.SolutionList;
 import de.featjar.configuration.list.DistributionMetrics.RatioDiffFunction;
 import de.featjar.formula.ModelRepresentation;
 import de.featjar.util.extension.ExtensionLoader;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.List;
 
 public class SharpSatSolverTest {
 
-	private static final Path modelDirectory = Paths.get("src/test/resources/testFeatureModels");
+    private static final Path modelDirectory = Paths.get("src/test/resources/testFeatureModels");
 
-	private static final List<String> modelNames = Arrays.asList( //
-		"basic", //
-		"simple", //
-		"car", //
-		"gpl_medium_model", //
-		"500-100");
+    private static final List<String> modelNames = Arrays.asList( //
+            "basic", //
+            "simple", //
+            "car", //
+            "gpl_medium_model", //
+            "500-100");
 
-	private static ModelRepresentation load(final Path modelFile) {
-		return ModelRepresentation.load(modelFile) //
-			.orElseThrow(p -> new IllegalArgumentException(p.isEmpty() ? null : p.get(0).toException()));
-	}
+    private static ModelRepresentation load(final Path modelFile) {
+        return ModelRepresentation.load(modelFile) //
+                .orElseThrow(p -> new IllegalArgumentException(
+                        p.isEmpty() ? null : p.get(0).toException()));
+    }
 
-	static {
-		ExtensionLoader.load();
-	}
+    static {
+        ExtensionLoader.load();
+    }
 
-	//@Test todo
-	public void distribution() {
-		for (final String modelName : modelNames.subList(0, 4)) {
-			final ModelRepresentation rep = load(modelDirectory.resolve(modelName + ".xml"));
-			final RatioDiffFunction ratioDiffFunction = new RatioDiffFunction(rep);
+    // @Test todo
+    public void distribution() {
+        for (final String modelName : modelNames.subList(0, 4)) {
+            final ModelRepresentation rep = load(modelDirectory.resolve(modelName + ".xml"));
+            final RatioDiffFunction ratioDiffFunction = new RatioDiffFunction(rep);
 
-			final SolutionList sample = rep.getResult(new AllConfigurationGenerator()).orElseThrow();
-			final List<ClauseList> expressions = TWiseConfigurationGenerator.convertLiterals(Clauses.getLiterals(
-				rep.getVariables())).get(0);
+            final SolutionList sample =
+                    rep.getResult(new AllConfigurationGenerator()).orElseThrow();
+            final List<ClauseList> expressions = TWiseConfigurationGenerator.convertLiterals(
+                            Clauses.getLiterals(rep.getVariables()))
+                    .get(0);
 
-			for (final ClauseList expression : expressions) {
-				final double diff = ratioDiffFunction.compute(sample, expression);
-				assertEquals(diff, 0, 0.000_000_000_000_1, modelName + " | " + String.valueOf(expression));
-			}
-		}
-	}
-
+            for (final ClauseList expression : expressions) {
+                final double diff = ratioDiffFunction.compute(sample, expression);
+                assertEquals(diff, 0, 0.000_000_000_000_1, modelName + " | " + String.valueOf(expression));
+            }
+        }
+    }
 }
