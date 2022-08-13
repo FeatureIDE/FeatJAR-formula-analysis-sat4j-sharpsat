@@ -8,3 +8,10 @@ dependencies {
     api 'de.featjar:formula-analysis-sat4j'
     api 'de.featjar:formula-analysis-sharpsat'
 }
+
+license {
+    ext {
+        author = 'Sebastian Krieter'
+        url = 'https://github.com/FeatJAR/formula-analysis-sat4j-sharpsat'
+    }
+}
