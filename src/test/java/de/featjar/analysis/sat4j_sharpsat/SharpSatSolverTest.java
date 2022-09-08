@@ -29,8 +29,7 @@ import de.featjar.clauses.Clauses;
 import de.featjar.clauses.solutions.SolutionList;
 import de.featjar.configuration.list.DistributionMetrics.RatioDiffFunction;
 import de.featjar.formula.ModelRepresentation;
-import de.featjar.util.extension.ExtensionLoader;
-import org.junit.jupiter.api.Test;
+import de.featjar.util.extension.Extensions;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -55,7 +54,7 @@ public class SharpSatSolverTest {
     }
 
     static {
-        ExtensionLoader.load();
+        Extensions.install();
     }
 
     //@Test
