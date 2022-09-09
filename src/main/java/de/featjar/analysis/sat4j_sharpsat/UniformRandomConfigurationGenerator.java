@@ -33,7 +33,7 @@ import de.featjar.formula.structure.Formula;
 import de.featjar.formula.structure.FormulaProvider;
 import de.featjar.formula.structure.atomic.literal.VariableMap;
 import de.featjar.util.data.Identifier;
-import de.featjar.util.job.InternalMonitor;
+import de.featjar.util.task.Monitor;
 
 /**
  * Finds certain solutions of propositional formulas.
@@ -59,7 +59,7 @@ public class UniformRandomConfigurationGenerator extends RandomConfigurationGene
     }
 
     @Override
-    protected void init(InternalMonitor monitor) {
+    protected void init(Monitor monitor) {
         satisfiable = findCoreFeatures(solver);
         if (!satisfiable) {
             return;
