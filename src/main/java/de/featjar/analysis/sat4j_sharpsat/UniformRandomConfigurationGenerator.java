@@ -27,12 +27,10 @@ import de.featjar.analysis.sharpsat.solver.SharpSatSolver;
 import de.featjar.analysis.solver.SatSolver;
 import de.featjar.clauses.Clauses;
 import de.featjar.clauses.LiteralList;
-import de.featjar.clauses.solutions.SolutionList;
 import de.featjar.formula.ModelRepresentation;
 import de.featjar.formula.structure.Formula;
-import de.featjar.formula.structure.FormulaProvider;
+import de.featjar.formula.structure.FormulaComputation;
 import de.featjar.formula.structure.atomic.literal.VariableMap;
-import de.featjar.util.data.Identifier;
 import de.featjar.util.task.Monitor;
 
 /**
@@ -41,14 +39,6 @@ import de.featjar.util.task.Monitor;
  * @author Sebastian Krieter
  */
 public class UniformRandomConfigurationGenerator extends RandomConfigurationGenerator {
-
-    public static final Identifier<SolutionList> identifier = new Identifier<>();
-
-    @Override
-    public Identifier<SolutionList> getIdentifier() {
-        return identifier;
-    }
-
     private VariableDistribution dist;
     private final ModelRepresentation rep;
     private SharpSatSolver sharpSatSolver;
@@ -64,7 +54,7 @@ public class UniformRandomConfigurationGenerator extends RandomConfigurationGene
         if (!satisfiable) {
             return;
         }
-        final Formula modelFormula = rep.get(FormulaProvider.CNF.fromFormula());
+        final Formula modelFormula = rep.get(FormulaComputation.CNF.fromFormula());
         sharpSatSolver = new SharpSatSolver(modelFormula);
         sharpSatSolver.getAssumptions().setAll(assumptions.getAll());
         sharpSatSolver.getDynamicFormula().push(assumedConstraints);
