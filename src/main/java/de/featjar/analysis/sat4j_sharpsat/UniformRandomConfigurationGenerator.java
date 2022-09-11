@@ -31,7 +31,7 @@ import de.featjar.formula.ModelRepresentation;
 import de.featjar.formula.structure.Formula;
 import de.featjar.formula.structure.FormulaComputation;
 import de.featjar.formula.structure.atomic.literal.VariableMap;
-import de.featjar.util.task.Monitor;
+import de.featjar.base.task.Monitor;
 
 /**
  * Finds certain solutions of propositional formulas.
