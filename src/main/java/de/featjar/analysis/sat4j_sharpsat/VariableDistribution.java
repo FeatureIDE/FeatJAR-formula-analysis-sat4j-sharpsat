@@ -21,7 +21,7 @@
 package de.featjar.analysis.sat4j_sharpsat;
 
 import de.featjar.analysis.sat4j.solver.LiteralDistribution;
-import de.featjar.analysis.sharpsat.solver.SharpSatSolver;
+import de.featjar.analysis.sharpsat.solver.SharpSATSolver;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.Arrays;
@@ -36,9 +36,9 @@ public class VariableDistribution extends LiteralDistribution {
 
     private final byte[] model;
     private BigDecimal totalCount;
-    private SharpSatSolver solver;
+    private SharpSATSolver solver;
 
-    public VariableDistribution(SharpSatSolver solver, int size) {
+    public VariableDistribution(SharpSATSolver solver, int size) {
         this.solver = solver;
         model = new byte[size];
         totalCount = new BigDecimal(solver.countSolutions());

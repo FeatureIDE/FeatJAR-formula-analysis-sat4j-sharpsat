@@ -23,13 +23,12 @@ package de.featjar.analysis.sat4j_sharpsat;
 import de.featjar.analysis.sat4j.RandomConfigurationGenerator;
 import de.featjar.analysis.sat4j.solver.SStrategy;
 import de.featjar.analysis.sat4j.solver.Sat4JSolver;
-import de.featjar.analysis.sharpsat.solver.SharpSatSolver;
-import de.featjar.analysis.solver.SatSolver;
-import de.featjar.clauses.Clauses;
-import de.featjar.clauses.LiteralList;
+import de.featjar.analysis.sharpsat.solver.SharpSATSolver;
+import de.featjar.formula.analysis.solver.SATSolver;
+import de.featjar.formula.clauses.Clauses;
+import de.featjar.formula.clauses.LiteralList;
 import de.featjar.formula.ModelRepresentation;
 import de.featjar.formula.structure.Formula;
-import de.featjar.formula.structure.FormulaComputation;
 import de.featjar.formula.structure.atomic.literal.VariableMap;
 import de.featjar.base.task.Monitor;
 
@@ -41,7 +40,7 @@ import de.featjar.base.task.Monitor;
 public class UniformRandomConfigurationGenerator extends RandomConfigurationGenerator {
     private VariableDistribution dist;
     private final ModelRepresentation rep;
-    private SharpSatSolver sharpSatSolver;
+    private SharpSATSolver sharpSatSolver;
 
     public UniformRandomConfigurationGenerator(ModelRepresentation rep) {
         super();
@@ -55,7 +54,7 @@ public class UniformRandomConfigurationGenerator extends RandomConfigurationGene
             return;
         }
         final Formula modelFormula = rep.get(FormulaComputation.CNF.fromFormula());
-        sharpSatSolver = new SharpSatSolver(modelFormula);
+        sharpSatSolver = new SharpSATSolver(modelFormula);
         sharpSatSolver.getAssumptions().setAll(assumptions.getAll());
         sharpSatSolver.getDynamicFormula().push(assumedConstraints);
 
@@ -95,7 +94,7 @@ public class UniformRandomConfigurationGenerator extends RandomConfigurationGene
             final int varX = fixedFeatures[i];
             if (varX != 0) {
                 solver.getAssumptions().push(-varX);
-                final SatSolver.SatResult hasSolution = solver.hasSolution();
+                final SATSolver.SatResult hasSolution = solver.hasSolution();
                 switch (hasSolution) {
                     case FALSE:
                         solver.getAssumptions().replaceLast(varX);

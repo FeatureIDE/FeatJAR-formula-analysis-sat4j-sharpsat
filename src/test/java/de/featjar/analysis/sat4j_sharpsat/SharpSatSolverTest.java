@@ -24,9 +24,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import de.featjar.analysis.sat4j.AllConfigurationGenerator;
 import de.featjar.analysis.sat4j.twise.TWiseConfigurationGenerator;
-import de.featjar.clauses.ClauseList;
-import de.featjar.clauses.Clauses;
-import de.featjar.clauses.solutions.SolutionList;
+import de.featjar.formula.clauses.ClauseList;
+import de.featjar.formula.clauses.Clauses;
+import de.featjar.formula.clauses.solutions.SolutionList;
 import de.featjar.configuration.list.DistributionMetrics.RatioDiffFunction;
 import de.featjar.formula.ModelRepresentation;
 import de.featjar.base.extension.ExtensionManager;
