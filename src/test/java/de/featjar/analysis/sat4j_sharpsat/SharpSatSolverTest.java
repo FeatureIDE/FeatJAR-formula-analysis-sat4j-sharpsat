@@ -28,7 +28,6 @@ import de.featjar.formula.clauses.ClauseList;
 import de.featjar.formula.clauses.Clauses;
 import de.featjar.formula.clauses.solutions.SolutionList;
 import de.featjar.configuration.list.DistributionMetrics.RatioDiffFunction;
-import de.featjar.formula.ModelRepresentation;
 import de.featjar.base.extension.ExtensionManager;
 
 import java.nio.file.Path;

@@ -27,9 +27,8 @@ import de.featjar.analysis.sharpsat.solver.SharpSATSolver;
 import de.featjar.formula.analysis.solver.SATSolver;
 import de.featjar.formula.clauses.Clauses;
 import de.featjar.formula.clauses.LiteralList;
-import de.featjar.formula.ModelRepresentation;
 import de.featjar.formula.structure.Formula;
-import de.featjar.formula.structure.atomic.literal.VariableMap;
+import de.featjar.formula.structure.VariableMap;
 import de.featjar.base.task.Monitor;
 
 /**
@@ -43,7 +42,6 @@ public class UniformRandomConfigurationGenerator extends RandomConfigurationGene
     private SharpSATSolver sharpSatSolver;
 
     public UniformRandomConfigurationGenerator(ModelRepresentation rep) {
-        super();
         this.rep = rep;
     }
 
