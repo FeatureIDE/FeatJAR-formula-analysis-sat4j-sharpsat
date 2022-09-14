@@ -28,7 +28,7 @@ import de.featjar.formula.analysis.solver.SATSolver;
 import de.featjar.formula.clauses.Clauses;
 import de.featjar.formula.clauses.LiteralList;
 import de.featjar.formula.structure.Formula;
-import de.featjar.formula.structure.VariableMap;
+import de.featjar.formula.structure.TermMap;
 import de.featjar.base.task.Monitor;
 
 /**
@@ -58,7 +58,7 @@ public class UniformRandomConfigurationGenerator extends RandomConfigurationGene
 
         dist = new VariableDistribution(
                 sharpSatSolver,
-                modelFormula.getVariableMap().map(VariableMap::getVariableCount).orElse(0));
+                modelFormula.getTermMap().map(TermMap::getVariableCount).orElse(0));
         dist.setRandom(getRandom());
         solver.setSelectionStrategy(SStrategy.uniform(dist));
     }
