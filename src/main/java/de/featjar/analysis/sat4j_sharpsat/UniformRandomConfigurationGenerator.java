@@ -27,7 +27,7 @@ import de.featjar.analysis.sharpsat.solver.SharpSATSolver;
 import de.featjar.formula.analysis.solver.SATSolver;
 import de.featjar.formula.clauses.Clauses;
 import de.featjar.formula.clauses.LiteralList;
-import de.featjar.formula.structure.Formula;
+import de.featjar.formula.structure.Expression;
 import de.featjar.formula.tmp.TermMap;
 import de.featjar.base.task.Monitor;
 
@@ -51,14 +51,14 @@ public class UniformRandomConfigurationGenerator extends RandomConfigurationGene
         if (!satisfiable) {
             return;
         }
-        final Formula modelFormula = rep.get(FormulaComputation.CNF.fromFormula());
-        sharpSatSolver = new SharpSATSolver(modelFormula);
+        final Expression modelExpression = rep.get(FormulaComputation.CNF.fromFormula());
+        sharpSatSolver = new SharpSATSolver(modelExpression);
         sharpSatSolver.getAssumptions().setAll(assumptions.getAll());
         sharpSatSolver.getDynamicFormula().push(assumedConstraints);
 
         dist = new VariableDistribution(
                 sharpSatSolver,
-                modelFormula.getTermMap().map(TermMap::getVariableCount).orElse(0));
+                modelExpression.getTermMap().map(TermMap::getVariableCount).orElse(0));
         dist.setRandom(getRandom());
         solver.setSelectionStrategy(SStrategy.uniform(dist));
     }
