@@ -47,7 +47,7 @@ public class VariableDistribution extends LiteralDistribution {
     @Override
     public void reset() {
         Arrays.fill(model, (byte) 0);
-        solver.getAssumptions().unsetAll();
+        solver.getAssumptions().clear();
     }
 
     @Override
@@ -56,7 +56,7 @@ public class VariableDistribution extends LiteralDistribution {
         final byte sign = model[index];
         if (sign != 0) {
             model[index] = 0;
-            solver.getAssumptions().unset(index + 1);
+            solver.getAssumptions().remove(index + 1);
         }
     }
 
@@ -80,7 +80,7 @@ public class VariableDistribution extends LiteralDistribution {
             final int varIndex = Math.abs(var);
             solver.getAssumptions().set(varIndex, true);
             final BigDecimal positiveCount = new BigDecimal(solver.countSolutions());
-            solver.getAssumptions().unset(varIndex);
+            solver.getAssumptions().remove(varIndex);
             final double ratio =
                     positiveCount.divide(totalCount, MathContext.DECIMAL32).doubleValue();
             final double randomValue = random.nextDouble();

@@ -53,7 +53,7 @@ public class UniformRandomConfigurationGenerator extends RandomConfigurationGene
         }
         final Expression modelExpression = rep.get(FormulaComputation.CNF.fromFormula());
         sharpSatSolver = new SharpSATSolver(modelExpression);
-        sharpSatSolver.getAssumptions().setAll(assumptions.getAll());
+        sharpSatSolver.getAssumptions().set(assumptions.get());
         sharpSatSolver.getDynamicFormula().push(assumedConstraints);
 
         dist = new VariableDistribution(
