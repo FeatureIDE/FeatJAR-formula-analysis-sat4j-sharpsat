@@ -18,16 +18,16 @@
  *
  * See <https://github.com/FeatureIDE/FeatJAR-formula-analysis-sat4j-sharpsat> for further information.
  */
-package de.featjar.analysis.sat4j_sharpsat;
+package de.featjar.formula.analysis.sat4j_sharpsat;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import de.featjar.analysis.sat4j.AllConfigurationGenerator;
-import de.featjar.analysis.sat4j.twise.TWiseConfigurationGenerator;
+import de.featjar.formula.analysis.sat4j.AllConfigurationGenerator;
+import de.featjar.formula.analysis.sat4j.twise.TWiseConfigurationGenerator;
 import de.featjar.formula.clauses.ClauseList;
 import de.featjar.formula.clauses.Clauses;
 import de.featjar.formula.clauses.solutions.SolutionList;
-import de.featjar.configuration.list.DistributionMetrics.RatioDiffFunction;
+import de.featjar.formula.configuration.list.DistributionMetrics.RatioDiffFunction;
 import de.featjar.base.extension.ExtensionManager;
 
 import java.nio.file.Path;

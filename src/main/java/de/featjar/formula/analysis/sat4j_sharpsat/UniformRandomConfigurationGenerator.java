@@ -18,12 +18,12 @@
  *
  * See <https://github.com/FeatureIDE/FeatJAR-formula-analysis-sat4j-sharpsat> for further information.
  */
-package de.featjar.analysis.sat4j_sharpsat;
+package de.featjar.formula.analysis.sat4j_sharpsat;
 
-import de.featjar.analysis.sat4j.RandomConfigurationGenerator;
-import de.featjar.analysis.sat4j.solver.SStrategy;
-import de.featjar.analysis.sat4j.solver.Sat4JSolver;
-import de.featjar.analysis.sharpsat.solver.SharpSATSolver;
+import de.featjar.formula.analysis.sat4j.RandomConfigurationGenerator;
+import de.featjar.formula.analysis.sat4j.solver.SStrategy;
+import de.featjar.formula.analysis.sat4j.solver.Sat4JSolver;
+import de.featjar.formula.analysis.sharpsat.solver.SharpSATSolver;
 import de.featjar.formula.analysis.solver.SATSolver;
 import de.featjar.formula.clauses.Clauses;
 import de.featjar.formula.clauses.LiteralList;

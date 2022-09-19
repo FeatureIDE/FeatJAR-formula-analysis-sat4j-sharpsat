@@ -18,10 +18,10 @@
  *
  * See <https://github.com/FeatureIDE/FeatJAR-formula-analysis-sat4j-sharpsat> for further information.
  */
-package de.featjar.analysis.sat4j_sharpsat;
+package de.featjar.formula.analysis.sat4j_sharpsat;
 
-import de.featjar.analysis.sat4j.solver.LiteralDistribution;
-import de.featjar.analysis.sharpsat.solver.SharpSATSolver;
+import de.featjar.formula.analysis.sat4j.solver.LiteralDistribution;
+import de.featjar.formula.analysis.sharpsat.solver.SharpSATSolver;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.Arrays;
