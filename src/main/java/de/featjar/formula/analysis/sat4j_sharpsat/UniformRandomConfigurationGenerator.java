@@ -54,7 +54,6 @@ public class UniformRandomConfigurationGenerator extends RandomConfigurationGene
         final Expression modelExpression = rep.get(FormulaComputation.CNF.fromFormula());
         sharpSatSolver = new SharpSATSolver(modelExpression);
         sharpSatSolver.getAssumptions().set(assumptions.get());
-        sharpSatSolver.getDynamicFormula().push(assumedConstraints);
 
         dist = new VariableDistribution(
                 sharpSatSolver,
@@ -66,7 +65,7 @@ public class UniformRandomConfigurationGenerator extends RandomConfigurationGene
     @Override
     protected void forbidSolution(final LiteralList negate) {
         super.forbidSolution(negate);
-        sharpSatSolver.getDynamicFormula().push(Clauses.toOrClause(negate, rep.getVariables()));
+        sharpSatSolver.getSolverFormula().push(Clauses.toOrClause(negate, rep.getVariables()));
     }
 
     @Override
@@ -92,7 +91,7 @@ public class UniformRandomConfigurationGenerator extends RandomConfigurationGene
             final int varX = fixedFeatures[i];
             if (varX != 0) {
                 solver.getAssumptions().push(-varX);
-                final SATSolver.SatResult hasSolution = solver.hasSolution();
+                final SATSolver.SATResult hasSolution = solver.hasSolution();
                 switch (hasSolution) {
                     case FALSE:
                         solver.getAssumptions().replaceLast(varX);
