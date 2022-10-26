@@ -22,7 +22,7 @@ package de.featjar.formula.analysis.sat4j_sharpsat;
 
 import de.featjar.formula.analysis.sat4j.RandomConfigurationGenerator;
 import de.featjar.formula.analysis.sat4j.solver.SStrategy;
-import de.featjar.formula.analysis.sat4j.solver.Sat4JSolver;
+import de.featjar.formula.analysis.sat4j.solver.Sat4JSolutionSolver;
 import de.featjar.formula.analysis.sharpsat.solver.SharpSATSolver;
 import de.featjar.formula.analysis.solver.SATSolver;
 import de.featjar.formula.clauses.Clauses;
@@ -69,7 +69,7 @@ public class UniformRandomConfigurationGenerator extends RandomConfigurationGene
     }
 
     @Override
-    protected void prepareSolver(Sat4JSolver solver) {
+    protected void prepareSolver(Sat4JSolutionSolver solver) {
         super.prepareSolver(solver);
         solver.setTimeout(1_000_000);
     }
@@ -79,7 +79,7 @@ public class UniformRandomConfigurationGenerator extends RandomConfigurationGene
         dist.reset();
     }
 
-    private boolean findCoreFeatures(Sat4JSolver solver) {
+    private boolean findCoreFeatures(Sat4JSolutionSolver solver) {
         final int[] fixedFeatures = solver.findSolution().getLiterals();
         if (fixedFeatures == null) {
             return false;
@@ -91,7 +91,7 @@ public class UniformRandomConfigurationGenerator extends RandomConfigurationGene
             final int varX = fixedFeatures[i];
             if (varX != 0) {
                 solver.getAssumptions().push(-varX);
-                final SATSolver.SATResult hasSolution = solver.hasSolution();
+                final SATSolver.Result<Boolean> hasSolution = solver.hasSolution();
                 switch (hasSolution) {
                     case FALSE:
                         solver.getAssumptions().replaceLast(varX);
