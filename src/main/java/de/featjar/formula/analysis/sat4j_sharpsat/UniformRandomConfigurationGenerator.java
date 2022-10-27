@@ -20,7 +20,7 @@
  */
 package de.featjar.formula.analysis.sat4j_sharpsat;
 
-import de.featjar.formula.analysis.sat4j.RandomConfigurationGenerator;
+import de.featjar.formula.analysis.sat4j.configuration.RandomConfigurationGenerator;
 import de.featjar.formula.analysis.sat4j.solver.SStrategy;
 import de.featjar.formula.analysis.sat4j.solver.Sat4JSolutionSolver;
 import de.featjar.formula.analysis.sharpsat.solver.SharpSATSolver;

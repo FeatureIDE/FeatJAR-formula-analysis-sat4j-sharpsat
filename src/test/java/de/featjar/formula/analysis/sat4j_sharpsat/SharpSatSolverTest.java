@@ -22,7 +22,7 @@ package de.featjar.formula.analysis.sat4j_sharpsat;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import de.featjar.formula.analysis.sat4j.AllConfigurationGenerator;
+import de.featjar.formula.analysis.sat4j.configuration.AllConfigurationGenerator;
 import de.featjar.formula.analysis.sat4j.twise.TWiseConfigurationGenerator;
 import de.featjar.formula.clauses.ClauseList;
 import de.featjar.formula.clauses.Clauses;
