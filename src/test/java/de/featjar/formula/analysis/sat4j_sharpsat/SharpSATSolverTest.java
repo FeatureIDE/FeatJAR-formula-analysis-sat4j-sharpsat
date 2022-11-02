@@ -35,7 +35,7 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 
-public class SharpSatSolverTest {
+public class SharpSATSolverTest {
 
     private static final Path modelDirectory = Paths.get("src/test/resources/testFeatureModels");
 
