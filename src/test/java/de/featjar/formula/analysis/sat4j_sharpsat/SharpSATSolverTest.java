@@ -25,7 +25,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import de.featjar.formula.analysis.sat4j.configuration.AllConfigurationGenerator;
 import de.featjar.formula.analysis.sat4j.twise.TWiseConfigurationGenerator;
 import de.featjar.formula.analysis.bool.BooleanAssignmentList;
-import de.featjar.formula.analysis.todo.Deprecated;
 import de.featjar.formula.analysis.bool.BooleanSolutionList;
 import de.featjar.formula.configuration.list.DistributionMetrics.RatioDiffFunction;
 import de.featjar.base.extension.ExtensionManager;
