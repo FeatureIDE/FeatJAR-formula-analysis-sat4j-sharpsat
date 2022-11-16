@@ -24,7 +24,7 @@ import de.featjar.formula.analysis.sat4j.configuration.RandomConfigurationGenera
 import de.featjar.formula.analysis.sat4j.solver.SStrategy;
 import de.featjar.formula.analysis.sat4j.solver.Sat4JSolutionSolver;
 import de.featjar.formula.analysis.sharpsat.solver.SharpSATSolver;
-import de.featjar.formula.analysis.sat.clause.CNFs;
+import de.featjar.formula.analysis.todo.Deprecated;
 import de.featjar.formula.structure.Expression;
 import de.featjar.formula.structure.map.TermMap;
 import de.featjar.base.task.Monitor;
@@ -63,7 +63,7 @@ public class UniformRandomConfigurationGenerator extends RandomConfigurationGene
     @Override
     protected void forbidSolution(final SortedIntegerList negate) {
         super.forbidSolution(negate);
-        sharpSatSolver.getSolverFormula().push(CNFs.toOrClause(negate, rep.getVariables()));
+        sharpSatSolver.getSolverFormula().push(Deprecated.toOrClause(negate, rep.getVariables()));
     }
 
     @Override
