@@ -25,7 +25,8 @@ import de.featjar.formula.analysis.sat4j.solver.SStrategy;
 import de.featjar.formula.analysis.sat4j.solver.Sat4JSolutionSolver;
 import de.featjar.formula.analysis.sharpsat.solver.SharpSATSolver;
 import de.featjar.formula.analysis.solver.SATSolver;
-import de.featjar.formula.analysis.sat.clause.CNFs;
+import de.featjar.formula.clauses.Clauses;
+import de.featjar.formula.clauses.LiteralList;
 import de.featjar.formula.structure.Expression;
 import de.featjar.formula.structure.map.TermMap;
 import de.featjar.base.task.Monitor;
@@ -52,7 +53,7 @@ public class UniformRandomConfigurationGenerator extends RandomConfigurationGene
         }
         final Expression modelExpression = rep.get(FormulaComputation.CNF.fromFormula());
         sharpSatSolver = new SharpSATSolver(modelExpression);
-        sharpSatSolver.getAssumptionList().set(assumptions.get());
+        sharpSatSolver.getAssumptions().set(assumptions.get());
 
         dist = new VariableDistribution(
                 sharpSatSolver,
@@ -62,9 +63,9 @@ public class UniformRandomConfigurationGenerator extends RandomConfigurationGene
     }
 
     @Override
-    protected void forbidSolution(final SortedIntegerList negate) {
+    protected void forbidSolution(final LiteralList negate) {
         super.forbidSolution(negate);
-        sharpSatSolver.getSolverFormula().push(CNFs.toOrClause(negate, rep.getVariables()));
+        sharpSatSolver.getSolverFormula().push(Clauses.toOrClause(negate, rep.getVariables()));
     }
 
     @Override
@@ -89,18 +90,18 @@ public class UniformRandomConfigurationGenerator extends RandomConfigurationGene
         for (int i = 0; i < fixedFeatures.length; i++) {
             final int varX = fixedFeatures[i];
             if (varX != 0) {
-                solver.getAssumptionList().push(-varX);
+                solver.getAssumptions().push(-varX);
                 final SATSolver.Result<Boolean> hasSolution = solver.hasSolution();
                 switch (hasSolution) {
                     case FALSE:
-                        solver.getAssumptionList().replaceLast(varX);
+                        solver.getAssumptions().replaceLast(varX);
                         break;
                     case TIMEOUT:
-                        solver.getAssumptionList().pop();
+                        solver.getAssumptions().pop();
                         break;
                     case TRUE:
-                        solver.getAssumptionList().pop();
-                        SortedIntegerList.resetConflicts(fixedFeatures, solver.getInternalSolution());
+                        solver.getAssumptions().pop();
+                        LiteralList.resetConflicts(fixedFeatures, solver.getInternalSolution());
                         solver.shuffleOrder(getRandom());
                         break;
                 }
