@@ -20,9 +20,9 @@
  */
 package de.featjar.formula.analysis.sat4j_sharpsat;
 
-import de.featjar.formula.analysis.sat4j.configuration.RandomConfigurationGenerator;
-import de.featjar.formula.analysis.sat4j.solver.SStrategy;
-import de.featjar.formula.analysis.sat4j.solver.Sat4JSolutionSolver;
+import de.featjar.formula.analysis.sat4j.todo.configuration.RandomConfigurationGenerator;
+import de.featjar.formula.analysis.sat4j.solver.SelectionStrategy;
+import de.featjar.formula.analysis.sat4j.solver.SAT4JSolutionSolver;
 import de.featjar.formula.analysis.sharpsat.solver.SharpSATSolver;
 import de.featjar.formula.structure.Expression;
 import de.featjar.formula.structure.map.TermMap;
@@ -56,7 +56,7 @@ public class UniformRandomConfigurationGenerator extends RandomConfigurationGene
                 sharpSatSolver,
                 modelExpression.getTermMap().map(TermMap::getVariableCount).orElse(0));
         dist.setRandom(getRandom());
-        solver.setSelectionStrategy(SStrategy.uniform(dist));
+        solver.setSelectionStrategy(SelectionStrategy.uniform(dist));
     }
 
     @Override
@@ -66,7 +66,7 @@ public class UniformRandomConfigurationGenerator extends RandomConfigurationGene
     }
 
     @Override
-    protected void prepareSolver(Sat4JSolutionSolver solver) {
+    protected void prepareSolver(SAT4JSolutionSolver solver) {
         super.prepareSolver(solver);
         solver.setTimeout(1_000_000);
     }
@@ -76,28 +76,28 @@ public class UniformRandomConfigurationGenerator extends RandomConfigurationGene
         dist.reset();
     }
 
-    private boolean findCoreFeatures(Sat4JSolutionSolver solver) {
+    private boolean findCoreFeatures(SAT4JSolutionSolver solver) {
         final int[] fixedFeatures = solver.findSolution().getLiterals();
         if (fixedFeatures == null) {
             return false;
         }
-        solver.setSelectionStrategy(SStrategy.inverse(fixedFeatures));
+        solver.setSelectionStrategy(SelectionStrategy.inverse(fixedFeatures));
 
         // find core/dead features
         for (int i = 0; i < fixedFeatures.length; i++) {
             final int varX = fixedFeatures[i];
             if (varX != 0) {
-                solver.getAssumptionList().push(-varX);
+                solver.getAssignment().add(-varX);
                 final SATSolver.Result<Boolean> hasSolution = solver.hasSolution();
                 switch (hasSolution) {
                     case FALSE:
-                        solver.getAssumptionList().replaceLast(varX);
+                        solver.getAssignment().replaceLast(varX);
                         break;
                     case TIMEOUT:
-                        solver.getAssumptionList().pop();
+                        solver.getAssignment().remove();
                         break;
                     case TRUE:
-                        solver.getAssumptionList().pop();
+                        solver.getAssignment().remove();
                         SortedIntegerList.resetConflicts(fixedFeatures, solver.getInternalSolution());
                         solver.shuffleOrder(getRandom());
                         break;

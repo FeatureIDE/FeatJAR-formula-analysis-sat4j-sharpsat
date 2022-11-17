@@ -22,8 +22,8 @@ package de.featjar.formula.analysis.sat4j_sharpsat;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import de.featjar.formula.analysis.sat4j.configuration.AllConfigurationGenerator;
-import de.featjar.formula.analysis.sat4j.twise.TWiseConfigurationGenerator;
+import de.featjar.formula.analysis.sat4j.todo.configuration.AllConfigurationGenerator;
+import de.featjar.formula.analysis.sat4j.todo.twise.TWiseConfigurationGenerator;
 import de.featjar.formula.analysis.bool.BooleanAssignmentList;
 import de.featjar.formula.analysis.bool.BooleanSolutionList;
 import de.featjar.formula.configuration.list.DistributionMetrics.RatioDiffFunction;
