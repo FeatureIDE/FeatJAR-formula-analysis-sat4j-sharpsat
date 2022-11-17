@@ -24,7 +24,6 @@ import de.featjar.formula.analysis.sat4j.configuration.RandomConfigurationGenera
 import de.featjar.formula.analysis.sat4j.solver.SStrategy;
 import de.featjar.formula.analysis.sat4j.solver.Sat4JSolutionSolver;
 import de.featjar.formula.analysis.sharpsat.solver.SharpSATSolver;
-import de.featjar.formula.analysis.solver.SATSolver;
 import de.featjar.formula.analysis.sat.clause.CNFs;
 import de.featjar.formula.structure.Expression;
 import de.featjar.formula.structure.map.TermMap;
