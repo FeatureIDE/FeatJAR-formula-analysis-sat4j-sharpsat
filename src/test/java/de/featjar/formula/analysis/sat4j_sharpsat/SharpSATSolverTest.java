@@ -56,7 +56,7 @@ public class SharpSATSolverTest {
     }
 
     //@Test
-    // todo: test fails, but is not currently in use
+    // TODO: test fails, but is not currently in use
     public void distribution() {
         for (final String modelName : modelNames.subList(0, 4)) {
             final ModelRepresentation rep = load(modelDirectory.resolve(modelName + ".xml"));
