@@ -30,8 +30,6 @@ import de.featjar.clauses.solutions.SolutionList;
 import de.featjar.configuration.list.DistributionMetrics.RatioDiffFunction;
 import de.featjar.formula.ModelRepresentation;
 import de.featjar.util.extension.ExtensionLoader;
-import org.junit.jupiter.api.Test;
-
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
@@ -58,7 +56,7 @@ public class SharpSatSolverTest {
         ExtensionLoader.load();
     }
 
-    //@Test
+    // @Test
     // todo: test fails, but is not currently in use
     public void distribution() {
         for (final String modelName : modelNames.subList(0, 4)) {
