@@ -20,7 +20,7 @@
  */
 package de.featjar.formula.analysis.sat4j_sharpsat;
 
-import de.featjar.formula.analysis.sat4j.solver.LiteralDistribution;
+import de.featjar.formula.analysis.sat4j.solver.ALiteralDistribution;
 import de.featjar.formula.analysis.sharpsat.solver.SharpSATSolver;
 import java.math.BigDecimal;
 import java.math.MathContext;
@@ -32,7 +32,7 @@ import java.util.Arrays;
  *
  * @author Sebastian Krieter
  */
-public class VariableDistribution extends LiteralDistribution {
+public class VariableDistribution extends ALiteralDistribution {
 
     private final byte[] model;
     private BigDecimal totalCount;

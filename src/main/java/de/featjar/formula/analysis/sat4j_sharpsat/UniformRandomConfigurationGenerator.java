@@ -21,10 +21,10 @@
 package de.featjar.formula.analysis.sat4j_sharpsat;
 
 import de.featjar.formula.analysis.sat4j.todo.configuration.RandomConfigurationGenerator;
-import de.featjar.formula.analysis.sat4j.solver.SelectionStrategy;
+import de.featjar.formula.analysis.sat4j.solver.ISelectionStrategy;
 import de.featjar.formula.analysis.sat4j.solver.SAT4JSolutionSolver;
 import de.featjar.formula.analysis.sharpsat.solver.SharpSATSolver;
-import de.featjar.formula.structure.Expression;
+import de.featjar.formula.structure.IExpression;
 import de.featjar.formula.structure.map.TermMap;
 import de.featjar.base.task.IMonitor;
 
@@ -48,7 +48,7 @@ public class UniformRandomConfigurationGenerator extends RandomConfigurationGene
         if (!satisfiable) {
             return;
         }
-        final Expression modelExpression = rep.get(FormulaComputation.CNF.fromFormula());
+        final IExpression modelExpression = rep.get(FormulaComputation.CNF.fromFormula());
         sharpSatSolver = new SharpSATSolver(modelExpression);
         sharpSatSolver.getAssumptionList().set(assumptions.get());
 
@@ -56,7 +56,7 @@ public class UniformRandomConfigurationGenerator extends RandomConfigurationGene
                 sharpSatSolver,
                 modelExpression.getTermMap().map(TermMap::getVariableCount).orElse(0));
         dist.setRandom(getRandom());
-        solver.setSelectionStrategy(SelectionStrategy.uniform(dist));
+        solver.setSelectionStrategy(ISelectionStrategy.uniform(dist));
     }
 
     @Override
@@ -81,7 +81,7 @@ public class UniformRandomConfigurationGenerator extends RandomConfigurationGene
         if (fixedFeatures == null) {
             return false;
         }
-        solver.setSelectionStrategy(SelectionStrategy.inverse(fixedFeatures));
+        solver.setSelectionStrategy(ISelectionStrategy.inverse(fixedFeatures));
 
         // find core/dead features
         for (int i = 0; i < fixedFeatures.length; i++) {

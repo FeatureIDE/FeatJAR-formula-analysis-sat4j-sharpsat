@@ -24,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import de.featjar.formula.analysis.sat4j.todo.configuration.AllConfigurationGenerator;
 import de.featjar.formula.analysis.sat4j.todo.twise.TWiseConfigurationGenerator;
-import de.featjar.formula.analysis.bool.BooleanAssignmentList;
+import de.featjar.formula.analysis.bool.ABooleanAssignmentList;
 import de.featjar.formula.analysis.bool.BooleanSolutionList;
 import de.featjar.formula.configuration.list.DistributionMetrics.RatioDiffFunction;
 import de.featjar.base.extension.ExtensionManager;
@@ -64,11 +64,11 @@ public class SharpSATSolverTest {
 
             final BooleanSolutionList sample =
                     rep.getResult(new AllConfigurationGenerator()).orElseThrow();
-            final List<BooleanAssignmentList> expressions = TWiseConfigurationGenerator.convertLiterals(
+            final List<ABooleanAssignmentList> expressions = TWiseConfigurationGenerator.convertLiterals(
                             Deprecated.getLiterals(rep.getVariables()))
                     .get(0);
 
-            for (final BooleanAssignmentList expression : expressions) {
+            for (final ABooleanAssignmentList expression : expressions) {
                 final double diff = ratioDiffFunction.compute(sample, expression);
                 assertEquals(diff, 0, 0.000_000_000_000_1, modelName + " | " + expression);
             }
