@@ -26,7 +26,6 @@ import de.featjar.formula.analysis.sat4j.solver.SAT4JSolutionSolver;
 import de.featjar.formula.analysis.sharpsat.solver.SharpSATSolver;
 import de.featjar.formula.structure.IExpression;
 import de.featjar.formula.structure.map.TermMap;
-import de.featjar.base.task.IMonitor;
 
 /**
  * Finds certain solutions of propositional formulas.
