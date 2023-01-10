@@ -47,7 +47,7 @@ public class VariableDistribution extends ALiteralDistribution {
     @Override
     public void reset() {
         Arrays.fill(model, (byte) 0);
-        solver.getAssumptionList().clear();
+        solver.getAssignment().clear();
     }
 
     @Override
@@ -56,7 +56,7 @@ public class VariableDistribution extends ALiteralDistribution {
         final byte sign = model[index];
         if (sign != 0) {
             model[index] = 0;
-            solver.getAssumptionList().remove(index + 1);
+            solver.getAssignment().remove(index + 1);
         }
     }
 
@@ -66,7 +66,7 @@ public class VariableDistribution extends ALiteralDistribution {
         if (model[index] == 0) {
             final boolean positive = literal > 0;
             model[index] = (byte) (positive ? 1 : -1);
-            solver.getAssumptionList().set(index + 1, positive);
+            solver.getAssignment().set(index + 1, positive);
         }
     }
 
@@ -78,9 +78,9 @@ public class VariableDistribution extends ALiteralDistribution {
             return sign > 0 ? var : -var;
         } else {
             final int varIndex = Math.abs(var);
-            solver.getAssumptionList().set(varIndex, true);
+            solver.getAssignment().set(varIndex, true);
             final BigDecimal positiveCount = new BigDecimal(solver.countSolutions());
-            solver.getAssumptionList().remove(varIndex);
+            solver.getAssignment().remove(varIndex);
             final double ratio =
                     positiveCount.divide(totalCount, MathContext.DECIMAL32).doubleValue();
             final double randomValue = random.nextDouble();

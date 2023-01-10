@@ -49,7 +49,7 @@ public class UniformRandomConfigurationGenerator extends RandomConfigurationGene
         }
         final IExpression modelExpression = rep.get(FormulaComputation.CNF.fromFormula());
         sharpSatSolver = new SharpSATSolver(modelExpression);
-        sharpSatSolver.getAssumptionList().set(assumptions.get());
+        sharpSatSolver.getAssignment().set(assumptions.get());
 
         dist = new VariableDistribution(
                 sharpSatSolver,
