@@ -22,13 +22,12 @@ package de.featjar.formula.analysis.sat4j_sharpsat;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import de.featjar.formula.analysis.sat4j.todo.configuration.AllConfigurationGenerator;
-import de.featjar.formula.analysis.sat4j.todo.twise.TWiseConfigurationGenerator;
+import de.featjar.base.extension.ExtensionManager;
 import de.featjar.formula.analysis.bool.ABooleanAssignmentList;
 import de.featjar.formula.analysis.bool.BooleanSolutionList;
+import de.featjar.formula.analysis.sat4j.todo.configuration.AllConfigurationGenerator;
+import de.featjar.formula.analysis.sat4j.todo.twise.TWiseConfigurationGenerator;
 import de.featjar.formula.configuration.list.DistributionMetrics.RatioDiffFunction;
-import de.featjar.base.extension.ExtensionManager;
-
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
@@ -55,7 +54,7 @@ public class SharpSATSolverTest {
         ExtensionManager.install();
     }
 
-    //@Test
+    // @Test
     // TODO: test fails, but is not currently in use
     public void distribution() {
         for (final String modelName : modelNames.subList(0, 4)) {
