@@ -32,59 +32,59 @@ import java.util.Arrays;
  *
  * @author Sebastian Krieter
  */
-public class VariableDistribution extends ALiteralDistribution {
+public class VariableDistribution { //extends ALiteralDistribution {
 
-    private final byte[] model;
-    private BigDecimal totalCount;
-    private SharpSATSolver solver;
-
-    public VariableDistribution(SharpSATSolver solver, int size) {
-        this.solver = solver;
-        model = new byte[size];
-        totalCount = new BigDecimal(solver.countSolutions());
-    }
-
-    @Override
-    public void reset() {
-        Arrays.fill(model, (byte) 0);
-        solver.getAssignment().clear();
-    }
-
-    @Override
-    public void unset(int var) {
-        final int index = var - 1;
-        final byte sign = model[index];
-        if (sign != 0) {
-            model[index] = 0;
-            solver.getAssignment().remove(index + 1);
-        }
-    }
-
-    @Override
-    public void set(int literal) {
-        final int index = Math.abs(literal) - 1;
-        if (model[index] == 0) {
-            final boolean positive = literal > 0;
-            model[index] = (byte) (positive ? 1 : -1);
-            solver.getAssignment().set(index + 1, positive);
-        }
-    }
-
-    @Override
-    public int getRandomLiteral(int var) {
-        final int index = Math.abs(var) - 1;
-        final byte sign = model[index];
-        if (sign != 0) {
-            return sign > 0 ? var : -var;
-        } else {
-            final int varIndex = Math.abs(var);
-            solver.getAssignment().set(varIndex, true);
-            final BigDecimal positiveCount = new BigDecimal(solver.countSolutions());
-            solver.getAssignment().remove(varIndex);
-            final double ratio =
-                    positiveCount.divide(totalCount, MathContext.DECIMAL32).doubleValue();
-            final double randomValue = random.nextDouble();
-            return randomValue < ratio ? var : -var;
-        }
-    }
+//    private final byte[] model;
+//    private BigDecimal totalCount;
+//    private SharpSATSolver solver;
+//
+//    public VariableDistribution(SharpSATSolver solver, int size) {
+//        this.solver = solver;
+//        model = new byte[size];
+//        totalCount = new BigDecimal(solver.countSolutions());
+//    }
+//
+//    @Override
+//    public void reset() {
+//        Arrays.fill(model, (byte) 0);
+//        solver.getAssignment().clear();
+//    }
+//
+//    @Override
+//    public void unset(int var) {
+//        final int index = var - 1;
+//        final byte sign = model[index];
+//        if (sign != 0) {
+//            model[index] = 0;
+//            solver.getAssignment().remove(index + 1);
+//        }
+//    }
+//
+//    @Override
+//    public void set(int literal) {
+//        final int index = Math.abs(literal) - 1;
+//        if (model[index] == 0) {
+//            final boolean positive = literal > 0;
+//            model[index] = (byte) (positive ? 1 : -1);
+//            solver.getAssignment().set(index + 1, positive);
+//        }
+//    }
+//
+//    @Override
+//    public int getRandomLiteral(int var) {
+//        final int index = Math.abs(var) - 1;
+//        final byte sign = model[index];
+//        if (sign != 0) {
+//            return sign > 0 ? var : -var;
+//        } else {
+//            final int varIndex = Math.abs(var);
+//            solver.getAssignment().set(varIndex, true);
+//            final BigDecimal positiveCount = new BigDecimal(solver.countSolutions());
+//            solver.getAssignment().remove(varIndex);
+//            final double ratio =
+//                    positiveCount.divide(totalCount, MathContext.DECIMAL32).doubleValue();
+//            final double randomValue = random.nextDouble();
+//            return randomValue < ratio ? var : -var;
+//        }
+//    }
 }

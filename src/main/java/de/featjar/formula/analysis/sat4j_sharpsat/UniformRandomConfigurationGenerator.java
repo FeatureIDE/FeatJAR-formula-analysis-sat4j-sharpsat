@@ -25,84 +25,83 @@ import de.featjar.formula.analysis.sat4j.solver.SAT4JSolutionSolver;
 import de.featjar.formula.analysis.sat4j.todo.configuration.RandomConfigurationGenerator;
 import de.featjar.formula.analysis.sharpsat.solver.SharpSATSolver;
 import de.featjar.formula.structure.IExpression;
-import de.featjar.formula.structure.map.TermMap;
 
 /**
  * Finds certain solutions of propositional formulas.
  *
  * @author Sebastian Krieter
  */
-public class UniformRandomConfigurationGenerator extends RandomConfigurationGenerator {
-    private VariableDistribution dist;
-    private final ModelRepresentation rep;
-    private SharpSATSolver sharpSatSolver;
-
-    public UniformRandomConfigurationGenerator(ModelRepresentation rep) {
-        this.rep = rep;
-    }
-
-    @Override
-    protected void init(IMonitor monitor) {
-        satisfiable = findCoreFeatures(solver);
-        if (!satisfiable) {
-            return;
-        }
-        final IExpression modelExpression = rep.get(FormulaComputation.CNF.fromFormula());
-        sharpSatSolver = new SharpSATSolver(modelExpression);
-        sharpSatSolver.getAssignment().set(assumptions.get());
-
-        dist = new VariableDistribution(
-                sharpSatSolver,
-                modelExpression.getTermMap().map(TermMap::getVariableCount).orElse(0));
-        dist.setRandom(getRandom());
-        solver.setSelectionStrategy(ISelectionStrategy.uniform(dist));
-    }
-
-    @Override
-    protected void forbidSolution(final SortedIntegerList negate) {
-        super.forbidSolution(negate);
-        sharpSatSolver.getSolverFormula().push(Deprecated.toOrClause(negate, rep.getVariables()));
-    }
-
-    @Override
-    protected void prepareSolver(SAT4JSolutionSolver solver) {
-        super.prepareSolver(solver);
-        solver.setTimeout(1_000_000);
-    }
-
-    @Override
-    protected void reset() {
-        dist.reset();
-    }
-
-    private boolean findCoreFeatures(SAT4JSolutionSolver solver) {
-        final int[] fixedFeatures = solver.findSolution().getLiterals();
-        if (fixedFeatures == null) {
-            return false;
-        }
-        solver.setSelectionStrategy(ISelectionStrategy.inverse(fixedFeatures));
-
-        // find core/dead features
-        for (int i = 0; i < fixedFeatures.length; i++) {
-            final int varX = fixedFeatures[i];
-            if (varX != 0) {
-                solver.getAssignment().add(-varX);
-                final SATSolver.Result<Boolean> hasSolution = solver.hasSolution();
-                switch (hasSolution) {
-                    case FALSE:
-                        solver.getAssignment().replaceLast(varX);
-                        break;
-                    case TIMEOUT:
-                        solver.getAssignment().remove();
-                        break;
-                    case TRUE:
-                        solver.getAssignment().remove();
-                        SortedIntegerList.resetConflicts(fixedFeatures, solver.getInternalSolution());
-                        solver.shuffleOrder(getRandom());
-                        break;
-                }
-            }
-        }
-        return true;
-    }
+public class UniformRandomConfigurationGenerator { // extends RandomConfigurationGenerator {
+//    private VariableDistribution dist;
+//    private final ModelRepresentation rep;
+//    private SharpSATSolver sharpSatSolver;
+//
+//    public UniformRandomConfigurationGenerator(ModelRepresentation rep) {
+//        this.rep = rep;
+//    }
+//
+//    @Override
+//    protected void init(IMonitor monitor) {
+//        satisfiable = findCoreFeatures(solver);
+//        if (!satisfiable) {
+//            return;
+//        }
+//        final IExpression modelExpression = rep.get(FormulaComputation.CNF.fromFormula());
+//        sharpSatSolver = new SharpSATSolver(modelExpression);
+//        sharpSatSolver.getAssignment().set(assumptions.get());
+//
+//        dist = new VariableDistribution(
+//                sharpSatSolver,
+//                modelExpression.getTermMap().map(TermMap::getVariableCount).orElse(0));
+//        dist.setRandom(getRandom());
+//        solver.setSelectionStrategy(ISelectionStrategy.uniform(dist));
+//    }
+//
+//    @Override
+//    protected void forbidSolution(final SortedIntegerList negate) {
+//        super.forbidSolution(negate);
+//        sharpSatSolver.getSolverFormula().push(Deprecated.toOrClause(negate, rep.getVariables()));
+//    }
+//
+//    @Override
+//    protected void prepareSolver(SAT4JSolutionSolver solver) {
+//        super.prepareSolver(solver);
+//        solver.setTimeout(1_000_000);
+//    }
+//
+//    @Override
+//    protected void reset() {
+//        dist.reset();
+//    }
+//
+//    private boolean findCoreFeatures(SAT4JSolutionSolver solver) {
+//        final int[] fixedFeatures = solver.findSolution().getLiterals();
+//        if (fixedFeatures == null) {
+//            return false;
+//        }
+//        solver.setSelectionStrategy(ISelectionStrategy.inverse(fixedFeatures));
+//
+//        // find core/dead features
+//        for (int i = 0; i < fixedFeatures.length; i++) {
+//            final int varX = fixedFeatures[i];
+//            if (varX != 0) {
+//                solver.getAssignment().add(-varX);
+//                final SATSolver.Result<Boolean> hasSolution = solver.hasSolution();
+//                switch (hasSolution) {
+//                    case FALSE:
+//                        solver.getAssignment().replaceLast(varX);
+//                        break;
+//                    case TIMEOUT:
+//                        solver.getAssignment().remove();
+//                        break;
+//                    case TRUE:
+//                        solver.getAssignment().remove();
+//                        SortedIntegerList.resetConflicts(fixedFeatures, solver.getInternalSolution());
+//                        solver.shuffleOrder(getRandom());
+//                        break;
+//                }
+//            }
+//        }
+//        return true;
+//    }
 }
